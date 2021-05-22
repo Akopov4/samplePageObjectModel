@@ -1,5 +1,6 @@
 from Base.base_page import BasePage
 from Base.base_page import InvalidPageException
+from Pages.search_region import SearchRegion
 from Locators.home_page_locators import HomePageLocators
 
 
@@ -14,3 +15,5 @@ class HomePage(BasePage):
 
         except:
             raise InvalidPageException("Home Page not loaded")
+
+

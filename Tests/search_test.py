@@ -1,5 +1,9 @@
 from Pages.home_page import HomePage
+import pytest
+
+@pytest.mark.usefixtures("browser")
 class SearchProductTest:
+
 
     def test_search_for_products(self):
         homepage = HomePage(self.driver)
