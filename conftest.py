@@ -19,31 +19,35 @@ def browser(request):
     desired_capabilities = dict()
 
     browser_name = None
-    remote_server=None
+    remote_server = None
 
-# if remote server was  from terminal
+    # if remote server was  from terminal
     if request.config.getoption("SERVER"):
         remote_server = request.config.getoption("SERVER")
 
-# if  remote server was from config
+    # if  remote server was from config
     elif read_config.get("Environments", "remote_server"):
         remote_server = read_config.get("Environments", "remote_server")
     else:
         print("Please input server")
 
-# if browser was from terminal
+    # if browser was from terminal
     if request.config.getoption("BROWSER"):
         if request.config.getoption("BROWSER") in ['chrome', 'chr']:
-            browser_name="chrome"
+            browser_name = "chrome"
 
         elif request.config.getoption("BROWSER") in ['firefox', 'ff']:
             browser_name = "firefox"
+    # if browser was from config
     elif read_config.get("Environments", "remote_server"):
         browser_name = read_config.get("Environments", "remote_server")
 
     try:
-        request.cls.driver = webdriver.Remote(command_executor=remote_server, desired_capabilities={"browserName": browser_name})
-    except:
+        request.cls.driver = webdriver.Remote(
+            command_executor=remote_server,
+            desired_capabilities={
+                "browserName": browser_name})
+    except BaseException:
         print("check browser or remote server configs")
 
     yield request.cls.driver
