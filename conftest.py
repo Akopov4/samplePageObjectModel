@@ -16,9 +16,9 @@ def pytest_addoption(parser):
 @pytest.fixture
 def environment_configuration(request):
     read_config = configparser.ConfigParser()
+
     # checking if browser was input from console or from config file from section Environment and assigment
     # it to browser_name variable
-
     browser_name = request.config.getoption(
         "BROWSER") or read_config.get("Environments", "browser")
 
