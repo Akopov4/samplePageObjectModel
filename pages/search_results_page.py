@@ -2,6 +2,9 @@ from locators.search_locators import SearchLocators as SL
 from base.base_page import BasePage, InvalidPageException
 from pages.product_page import ProductPage
 
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 class SearchResults(BasePage):
     _products_count = 0
@@ -9,8 +12,7 @@ class SearchResults(BasePage):
 
     def __init__(self, driver):
         super(SearchResults, self).__init__(driver)
-        results = self.driver.find_elements_by_css_selector(
-            SL.product_list_locator)
+        results = WebDriverWait(self.driver, 20).until(EC.presence_of_element_located((By.CSS_SELECTOR,SL.product_list_locator)))
 
         for product in results:
             name = product.find_element_by_css_selector(
