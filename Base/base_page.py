@@ -1,4 +1,4 @@
-from Pages.search_region import SearchRegion
+
 
 
 class BasePage(object):
@@ -10,8 +10,7 @@ class BasePage(object):
     def __validate_page(self, driver):
         return
 
-    def search(self):
-        return SearchRegion(self.driver)
+
 
 
 class InvalidPageException(Exception):

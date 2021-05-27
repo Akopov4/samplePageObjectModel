@@ -13,20 +13,38 @@ def environment_options(parser):
     parser.addoption('--server', '-S', dest="SERVER")
 
 
+# @pytest.fixture(scope='class')
+# def environment_configuration(request):
+#     read_config = configparser.ConfigParser()
+#     # checking if browser was input from console or from config file from section Environment and assigment
+#     # it to browser_name variable
+#
+#     browser_name = request.config.getoption(
+#         "BROWSER") or read_config.get("Environments", "browser")
+#
+#     # checking if remote server was input from console or from config file from section Environment and assigment
+#     # it to remote_server variable
+#     remote_server = request.config.getoption(
+#         "SERVER") or read_config.get("Environments", "remote_server")
+#
+#     try:
+#         request.cls.driver = webdriver.Remote(
+#             command_executor=remote_server,
+#             desired_capabilities={
+#                 "browserName": browser_name})
+#     except BaseException:
+#         print("check browser or remote server configs")
+#
+#     yield request.cls.driver
+#
+#     request.cls.driver.close()
+#     request.cls.driver.quit()
+
 @pytest.fixture(scope='class')
-def environment_configuration(request):
+def environment_configuration(metafunc,request):
     read_config = configparser.ConfigParser()
-    # checking if browser was input from console or from config file from section Environment and assigment
-    # it to browser_name variable
-
-    browser_name = request.config.getoption(
-        "BROWSER") or read_config.get("Environments", "browser")
-
-    # checking if remote server was input from console or from config file from section Environment and assigment
-    # it to remote_server variable
-    remote_server = request.config.getoption(
-        "SERVER") or read_config.get("Environments", "remote_server")
-
+    browser_name = metafunc.config.option.browser or read_config.get("Environments", "browser")
+    remote_server = metafunc.config.option.server or read_config.get("Environments", "remote_server")
     try:
         request.cls.driver = webdriver.Remote(
             command_executor=remote_server,

@@ -1,6 +1,6 @@
 from Locators.search_locators import SearchLocators as SL
 from Base.base_page import BasePage, InvalidPageException
-from product_page import ProductPage
+from Pages.product_page import ProductPage
 
 
 class SearchResults(BasePage):
