@@ -1,6 +1,6 @@
-from Base.base_page import BasePage, InvalidPageException
-from Pages.search_region import SearchRegion
-from Locators.home_page_locators import HomePageLocators
+from base.base_page import BasePage, InvalidPageException
+from pages.search_region import SearchRegion
+from locators.home_page_locators import HomePageLocators
 
 
 class HomePage(BasePage):

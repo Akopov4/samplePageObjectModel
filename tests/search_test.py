@@ -1,4 +1,4 @@
-from Pages.home_page import HomePage
+from pages.home_page import HomePage
 import pytest
 
 @pytest.mark.usefixtures("environment_configuration")

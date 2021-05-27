@@ -1,5 +1,5 @@
-from Base.base_page import BasePage, InvalidPageException
-from Locators.product_page_locators import ProductPageLocators as PPL
+from base.base_page import BasePage, InvalidPageException
+from locators.product_page_locators import ProductPageLocators as PPL
 
 
 class ProductPage(BasePage):

@@ -1,6 +1,6 @@
-from Base.base_page import BasePage
-from Pages.search_results_page import SearchResults
-from Locators.search_locators import SearchLocators as SL
+from base.base_page import BasePage
+from pages.search_results_page import SearchResults
+from locators.search_locators import SearchLocators as SL
 
 class SearchRegion(BasePage):
 
