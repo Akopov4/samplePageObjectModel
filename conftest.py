@@ -14,33 +14,18 @@ def environment_options(parser):
 
 
 @pytest.fixture(scope='class')
-def browser(request):
+def environment_configuration(request):
     read_config = configparser.ConfigParser()
-    desired_capabilities = dict()
+    # checking if browser was input from console or from config file from section Environment and assigment
+    # it to browser_name variable
 
-    browser_name = None
-    remote_server = None
+    browser_name = request.config.getoption(
+        "BROWSER") or read_config.get("Environments", "browser")
 
-    # if remote server was  from terminal
-    if request.config.getoption("SERVER"):
-        remote_server = request.config.getoption("SERVER")
-
-    # if  remote server was from config
-    elif read_config.get("Environments", "remote_server"):
-        remote_server = read_config.get("Environments", "remote_server")
-    else:
-        print("Please input server")
-
-    # if browser was from terminal
-    if request.config.getoption("BROWSER"):
-        if request.config.getoption("BROWSER") in ['chrome', 'chr']:
-            browser_name = "chrome"
-
-        elif request.config.getoption("BROWSER") in ['firefox', 'ff']:
-            browser_name = "firefox"
-    # if browser was from config
-    elif read_config.get("Environments", "remote_server"):
-        browser_name = read_config.get("Environments", "remote_server")
+    # checking if remote server was input from console or from config file from section Environment and assigment
+    # it to remote_server variable
+    remote_server = request.config.getoption(
+        "SERVER") or read_config.get("Environments", "remote_server")
 
     try:
         request.cls.driver = webdriver.Remote(

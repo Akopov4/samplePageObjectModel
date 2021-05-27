@@ -1,7 +1,7 @@
 from Pages.home_page import HomePage
 import pytest
 
-@pytest.mark.usefixtures("browser")
+@pytest.mark.usefixtures("environment_configuration")
 class SearchProductTest:
 
 
