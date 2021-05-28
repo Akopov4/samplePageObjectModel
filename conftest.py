@@ -5,7 +5,7 @@ import pytest
 import configparser
 from selenium import webdriver
 import os
-
+import logging
 def pytest_addoption(parser):
     parser.addoption('--browser', '-B', dest='BROWSER',
                      help=f"possible values are: {['chrome', 'chr', 'firefox', 'ff']}")
@@ -16,7 +16,9 @@ def pytest_addoption(parser):
 @pytest.fixture
 def environment_configuration(request):
     read_config = configparser.ConfigParser()
+
     read_config.read(os.path.dirname(os.path.abspath(__file__)) + "/config.ini")
+
     # checking if browser was input from console or from config file from section Environment and assigment
     # it to browser_name variable
     browser_name = request.config.getoption(
@@ -31,7 +33,9 @@ def environment_configuration(request):
         command_executor=remote_server,
         desired_capabilities={
             "browserName": browser_name})
+
     driver.get("http://magento-demo.lexiconn.com/")
+
 
     yield driver
     driver.close()
