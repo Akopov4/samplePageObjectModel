@@ -15,11 +15,12 @@ class SearchResults(BasePage):
         results = WebDriverWait(self.driver, 20).until(EC.presence_of_element_located((By.CSS_SELECTOR,SL.product_list_locator)))
 
         for product in results:
-            name = product.find_element_by_css_selector(
-                SL.product_name_locator).text
-            self._products[name] = product.find_element_by_css_selector(
-                SL.product_image_link)
-
+            name = WebDriverWait(self.driver, 20).until(EC.presence_of_element_located((By.CSS_SELECTOR,SL.product_name_locator))).text
+            # name = product.find_element_by_css_selector(
+            #     SL.product_name_locator).text
+            # self._products[name] = product.find_element_by_css_selector(
+            #     SL.product_image_link)
+            self._products[name]= WebDriverWait(self.driver,20).until(EC.presence_of_element_located((By.CSS_SELECTOR,SL.product_image_link)))
     def __validate_page(self, driver):
         if 'Search results for' not in driver.title:
             raise InvalidPageException('Search results not loaded')
